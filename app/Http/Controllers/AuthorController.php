@@ -12,11 +12,12 @@ class AuthorController extends Controller
 {
     public function index(): AnonymousResourceCollection
     {
-        return AuthorResource::collection(Author::all());
+        return AuthorResource::collection(Author::with('books')->get());
     }
 
     public function show(Author $author): AuthorResource
     {
+        $author->load('books');
         return new AuthorResource($author);
     }
 

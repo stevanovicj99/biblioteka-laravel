@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Author extends Model
+class Book extends Model
 {
     use HasFactory;
 
@@ -15,13 +15,15 @@ class Author extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'first_name',
-        'last_name',
-        'birthday'
+        'title',
+        'publication_date',
+        'price',
+        'description',
+        'author_id'
     ];
 
-    public function books()
+    public function author()
     {
-        return $this->hasMany(Book::class);
+        return $this->belongsTo(Author::class);
     }
 }
