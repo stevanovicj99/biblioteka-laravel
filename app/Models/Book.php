@@ -19,11 +19,17 @@ class Book extends Model
         'publication_date',
         'price',
         'description',
-        'author_id'
+        'author_id',
+        'subject_id'
     ];
 
     public function author()
     {
         return $this->belongsTo(Author::class);
+    }
+
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class);
     }
 }

@@ -25,6 +25,6 @@ class AuthController extends Controller
 
         return new JsonResponse([
             'message' => 'Unauthorized!'
-        ], 404);
+        ], 401);
     }
 }

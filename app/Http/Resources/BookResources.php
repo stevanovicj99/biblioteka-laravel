@@ -20,7 +20,8 @@ class BookResources extends JsonResource
             'publication_date' => $this->publication_date,
             'price' => $this->price,
             'description' => $this->description,
-            'author' => new AuthorResource($this->whenLoaded('author'))
+            'author' => new AuthorResource($this->whenLoaded('author')),
+            'subject' => new SubjectResources($this->whenLoaded('subject'))
         ];
     }
 }

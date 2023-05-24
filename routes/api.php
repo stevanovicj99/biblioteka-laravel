@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\SubjectController;
 use App\Http\Requests\BookStoreRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +41,15 @@ Route::prefix('v1')->group(function () {
             Route::post('/', [BookController::class, 'store']);
             Route::put('/{book}', [BookController::class, 'update']);
             Route::delete('/{book}', [BookController::class, 'destroy']);
+        });
+        Route::prefix('subjects')->group(function () {
+            Route::get('/', [SubjectController::class, 'index'])
+                ->withoutMiddleware(['auth:sanctum']);
+            Route::get('/{subject}', [SubjectController::class, 'show'])
+                ->withoutMiddleware(['auth:sanctum']);
+            Route::post('/', [SubjectController::class, 'store']);
+            Route::put('/{subject}', [SubjectController::class, 'update']);
+            Route::delete('/{subject}', [SubjectController::class, 'destroy']);
         });
     });
 });

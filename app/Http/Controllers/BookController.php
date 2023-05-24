@@ -13,12 +13,13 @@ class BookController extends Controller
 {
     public function index(): AnonymousResourceCollection
     {
-        return BookResources::collection(Book::with('author')->get());
+        return BookResources::collection(Book::with(['author', 'subject'])->get());
     }
 
     public function show(Book $book): BookResources
     {
-        $book->load('author');
+        $book->load(['author', 'subject']);
+
         return new BookResources($book);
     }
 
@@ -30,8 +31,11 @@ class BookController extends Controller
         $book->price = $request->input('price');
         $book->description = $request->input('description');
         $book->author_id = $request->input('author_id');
+        $book->subject_id = $request->input('subject_id');
+
         $book->save();
-        $book->load('author');
+        $book->load(['author', 'subject']);
+
         return new JsonResponse([
             'data' => new BookResources($book),
             'message' => "Success!"
@@ -45,8 +49,11 @@ class BookController extends Controller
         $book->price = $request->input('price');
         $book->description = $request->input('description');
         $book->author_id = $request->input('author_id');
+        $book->subject_id = $request->input('subject_id');
+
         $book->save();
-        $book->load('author');
+        $book->load(['author', 'subject']);
+
         return new JsonResponse([
             'data' => new BookResources($book),
             'message' => "Success!"
